@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>邹祥发 - Java开发工程师</title>
+    <title>邹祥发 - 架构师</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -683,6 +683,76 @@
         }
 
         /* ============================================
+           返回顶部按钮
+           ============================================ */
+        .back-to-top {
+            position: fixed;
+            bottom: var(--space-6);
+            right: calc(var(--space-6) + 60px);
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: var(--shadow-xl);
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+        }
+
+        .back-to-top:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        .back-to-top i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-to-top:hover i {
+            transform: translateY(-2px);
+        }
+
+        /* 移动端返回顶部按钮样式 */
+        @media (max-width: 768px) {
+            .back-to-top {
+                right: var(--space-4);
+                bottom: calc(var(--space-4) + 70px);
+                width: 44px;
+                height: 44px;
+                font-size: var(--text-base);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .back-to-top {
+                right: var(--space-3);
+                bottom: calc(var(--space-3) + 65px);
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* ============================================
            打印按钮
            ============================================ */
         .print-btn {
@@ -820,6 +890,11 @@
             .experience-desc p::before {
                 left: var(--space-1);
             }
+
+            .print-btn {
+                padding: var(--space-2) var(--space-4);
+                font-size: var(--text-xs);
+            }
         }
 
         /* ============================================
@@ -837,7 +912,8 @@
             }
             
             .social-links,
-            .print-btn {
+            .print-btn,
+            .back-to-top {
                 display: none;
             }
             
@@ -876,11 +952,11 @@
             </div>
             <div class="header-content">
                 <h1>邹祥发</h1>
-                <div class="title">Java开发工程师 · 衡阳</div>
+                <div class="title">架构师 · 衡阳</div>
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
-                        <span>15795197338</span>
+                        <span>18173461623</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
@@ -918,11 +994,11 @@
                         </div>
                         <div class="info-item">
                             <span class="info-label">年龄</span>
-                            <span class="info-value">25岁</span>
+                            <span class="info-value">26岁</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">工作经验</span>
-                            <span class="info-value">4年</span>
+                            <span class="info-value">5年</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">学历</span>
@@ -946,7 +1022,7 @@
                         </div>
                         <div class="info-item">
                             <span class="info-label">求职状态</span>
-                            <span class="info-value" style="color: #38a169; font-weight: 600;">在职-考虑机会</span>
+                            <span class="info-value" style="color: #e53e3e; font-weight: 600;">离职-随时到岗</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">期望薪资</span>
@@ -965,19 +1041,28 @@
                         <span class="tech-tag">Java</span>
                         <span class="tech-tag">Spring Boot</span>
                         <span class="tech-tag">Spring Cloud</span>
+                        <span class="tech-tag">Spring Security</span>
                         <span class="tech-tag">MyBatis-Plus</span>
                         <span class="tech-tag">MySQL</span>
                         <span class="tech-tag">Redis</span>
                         <span class="tech-tag">Kafka</span>
                         <span class="tech-tag">RocketMQ</span>
                         <span class="tech-tag">Elasticsearch</span>
+                        <span class="tech-tag">MongoDB</span>
                         <span class="tech-tag">Docker</span>
                         <span class="tech-tag">Nginx</span>
                         <span class="tech-tag">Linux</span>
                         <span class="tech-tag">Git</span>
                         <span class="tech-tag">Vue</span>
+                        <span class="tech-tag">Thymeleaf</span>
                         <span class="tech-tag">WebSocket</span>
+                        <span class="tech-tag">JWT</span>
                         <span class="tech-tag">AI大模型</span>
+                        <span class="tech-tag">GPT</span>
+                        <span class="tech-tag">DeepSeek</span>
+                        <span class="tech-tag">Kimi</span>
+                        <span class="tech-tag">微信支付</span>
+                        <span class="tech-tag">支付宝</span>
                     </div>
                 </section>
 
@@ -990,23 +1075,27 @@
                     <div class="skill-list">
                         <div class="skill-category">
                             <div class="skill-category-title">后端开发</div>
-                            <div class="skill-items">Java、Spring Boot、Spring Cloud、MyBatis-Plus、JVM调优</div>
+                            <div class="skill-items">Java、Spring Boot、Spring Cloud、Spring Security、MyBatis-Plus、JWT认证、多线程并发、JVM调优</div>
                         </div>
                         <div class="skill-category">
                             <div class="skill-category-title">数据库</div>
-                            <div class="skill-items">MySQL、Redis、Elasticsearch、MongoDB</div>
+                            <div class="skill-items">MySQL（索引优化、分库分表）、Redis（缓存设计、分布式锁）、Elasticsearch、MongoDB</div>
                         </div>
                         <div class="skill-category">
                             <div class="skill-category-title">中间件</div>
-                            <div class="skill-items">Kafka、RocketMQ、Nginx、Docker</div>
+                            <div class="skill-items">Kafka、RocketMQ、Nginx（反向代理、负载均衡）、Docker、Sentinel（限流熔断）</div>
                         </div>
                         <div class="skill-category">
                             <div class="skill-category-title">前端技术</div>
-                            <div class="skill-items">Vue、jQuery、Thymeleaf、HTML5、CSS3</div>
+                            <div class="skill-items">Vue、Thymeleaf、jQuery、HTML5、CSS3、微信小程序</div>
                         </div>
                         <div class="skill-category">
                             <div class="skill-category-title">AI技术</div>
-                            <div class="skill-items">智谱AI GLM-4、GPT、Gemma、智能对话、文档处理、AI审核</div>
+                            <div class="skill-items">GPT、DeepSeek、Kimi、Llama、Qwen、GLM-4等大模型集成，智能对话系统、RAG检索增强、AI Agent开发</div>
+                        </div>
+                        <div class="skill-category">
+                            <div class="skill-category-title">业务场景</div>
+                            <div class="skill-items">支付系统（微信/支付宝）、文件处理（PDF/Word/Excel）、语音合成、网络搜索、内容分享</div>
                         </div>
                     </div>
                 </section>
@@ -1020,23 +1109,27 @@
                     <div class="advantage-list">
                         <div class="advantage-tag">
                             <i class="fas fa-check-circle"></i>
-                            <span>4年Java后端开发经验</span>
+                            <span>AI应用架构设计能力</span>
                         </div>
                         <div class="advantage-tag">
                             <i class="fas fa-check-circle"></i>
-                            <span>独立负责完整项目架构</span>
+                            <span>多模型大模型集成经验</span>
                         </div>
                         <div class="advantage-tag">
                             <i class="fas fa-check-circle"></i>
-                            <span>AI应用开发实践经验</span>
+                            <span>高并发后端系统开发</span>
                         </div>
                         <div class="advantage-tag">
                             <i class="fas fa-check-circle"></i>
-                            <span>全栈开发能力</span>
+                            <span>多端业务支撑能力</span>
                         </div>
                         <div class="advantage-tag">
                             <i class="fas fa-check-circle"></i>
-                            <span>技术博客持续输出</span>
+                            <span>技术负责人团队管理经验</span>
+                        </div>
+                        <div class="advantage-tag">
+                            <i class="fas fa-check-circle"></i>
+                            <span>完整支付系统开发经验</span>
                         </div>
                     </div>
                 </section>
@@ -1087,7 +1180,7 @@
                         <h2>个人优势</h2>
                     </div>
                     <p>博客：<a href="https://www.hqxiaozou.top" target="_blank">https://www.hqxiaozou.top</a></p>
-                    <p>拥有扎实的 Java 基础，掌握常用算法和数据结构。可以熟练使用 SpringBoot、MyBatis 等主流框架进行服务端开发、整体性能优化，熟练掌握各种 Git 版本管理工具，熟悉 MySQL、Redis 数据库。</p>
+                    <p>擅长AI应用架构设计与高并发后端系统开发的全栈工程师。3年企业级工程经验 + 2年在校期间项目实践，主导过AI法律助手、多模型AI对话平台等从0到1的产品落地，具备完整的SpringBoot微服务架构设计、大模型 API 集成（GPT / DeepSeek / GLM 等）、以及小程序 / Web 多端业务支撑能力。曾独立负责后端系统架构与小型技术团队管理。</p>
                 </section>
                 
                 <!-- 工作经历 -->
@@ -1099,15 +1192,15 @@
                     <ul class="experience-list">
                         <li class="experience-item">
                             <div class="experience-header">
-                                <div class="experience-title">法帮邦AI法律助手 · 后端开发工程师</div>
-                                <div class="experience-period">2025年3月 - 至今</div>
+                                <div class="experience-title">长远（湖南）数字科技有限公司 · 技术负责人</div>
+                                <div class="experience-period">2025年3月 - 2026年4月</div>
                             </div>
                             <div class="experience-desc">
-                                <p>独立负责"法帮邦"AI法律助手后端系统的架构设计与核心功能开发，基于Spring Boot构建高可用的法律服务后端服务，支撑小程序、APP及Web三端业务。</p>
-                                <p>设计并实现AI智能对话系统：开发多轮对话管理模块，支持会话历史追踪与上下文保持；实现敏感词实时过滤与用户信息脱敏机制，保障对话内容安全合规。</p>
-                                <p>构建文档智能处理引擎：实现PDF/Word/TXT多格式合同文档的解析与内容提取；开发Markdown转Word文档生成服务，支持AI生成法律文书的格式化处理与导出。</p>
-                                <p>搭建法律知识库体系：设计并实现法律案例检索、法律条文查询、文书模板管理等核心数据服务，构建完整的法律知识检索支持系统。</p>
-                                <p>负责系统架构与数据层设计：基于MySQL设计24张核心业务表，使用MyBatis-Plus实现高效ORM操作；集成Redis缓存提升热点数据查询性能；实现JWT认证与微信登录，保障用户数据安全。</p>
+                                <p>独立负责"法帮邦"AI法律助手后端系统的架构设计与核心功能开发，支撑小程序、APP 及 Web 三端业务。</p>
+                                <p>AI 智能对话系统：设计多轮对话管理模块，实现会话历史追踪与上下文保持；开发敏感词实时过滤与用户信息脱敏机制，保障对话内容安全合规。</p>
+                                <p>文档智能处理引擎：实现 PDF / Word / TXT 多格式合同文档的解析与内容提取；开发 Markdown 转 Word 文档生成服务，支持 AI 生成法律文书的格式化处理与导出。</p>
+                                <p>法律知识库体系：设计法律案例检索、法律条文查询、文书模板管理等核心数据服务；基于 MySQL 设计 24 张核心业务表，通过索引优化与 Redis 缓存提升热点数据查询性能。</p>
+                                <p>用户认证与部署：实现 JWT 认证与微信一键登录；通过 Nginx 反向代理部署后端服务，配置 SSL 证书与安全防护策略。</p>
                             </div>
                         </li>
                         <li class="experience-item">
@@ -1144,6 +1237,25 @@
                         <h2>项目经历</h2>
                     </div>
                     <ul class="experience-list">
+                        <li class="experience-item">
+                            <div class="experience-header">
+                                <div class="experience-title">通意千应</div>
+                            </div>
+                            <div class="experience-desc">
+                                <p><strong>技术栈：</strong>Spring Boot、MyBatis-Plus、MySQL、Redis、Spring Security、JWT、NVIDIA API、Tavily 搜索 API、百度语音合成 API、七牛云对象存储、Thymeleaf、Selenium、Apache POI、PDFBox、EasyExcel、Nginx</p>
+                                <p><strong>成果：</strong></p>
+                                <p>1. 多模型 AI 对话模块：集成 Kimi、DeepSeek、Llama、Qwen、Step、Nemotron、Minimax 等 7 种主流大模型，构建支持上下文关联的智能对话系统。实现用户会话历史的持久化与查询，支持消息重新生成、会话分享、深度思考模式、AI 人设切换（暴躁老哥、可爱猫娘、乖欲魅魔、云游老道、风情少妇）等功能，为用户提供灵活的 AI 交互体验。</p>
+                                <p>2. 智能网络搜索模块：集成 Tavily AI 搜索引擎，实现实时网络信息获取与智能分析。设计三 API Key 故障转移机制（主 Key + 两个备用 Key），当主 Key 失败或超时时自动切换到备用 Key，保障搜索服务的高可用性。支持多查询并行搜索、搜索结果与 AI 回复的智能融合，使 AI 能基于最新网络信息进行深度回复。</p>
+                                <p>3. 多模态文件处理模块：支持用户上传多种格式文件（PDF、Word、Excel、PPT、TXT、图片等），自动提取文件内容并与 AI 对话结合。集成 Apache POI、PDFBox 等文档解析库，实现 Office 文档和 PDF 的智能解析，支持图片上传与 AI 视觉分析。</p>
+                                <p>4. URL 内容智能解析模块：自动检测用户输入中的 URL 链接，提取页面标题、描述、正文内容及相关元信息，支持 SPA 单页应用的内容提取。将 URL 内容与 AI 对话结合，实现基于网页内容的智能问答。</p>
+                                <p>5. 语音合成模块：集成百度智能云语音合成 API，支持将 AI 回复转换为语音播放。实现文本智能分段、异步合成、多音色选择（基础音库 + 精品音库），提供流畅的语音交互体验。</p>
+                                <p>6. 会员与支付模块：实现完整的会员订阅体系，支持微信支付、支付宝支付双渠道。设计会员权益管理、支付回调处理、订单管理等功能，通过优惠券系统支持兑换码兑换会员时长。</p>
+                                <p>7. 用户与会话管理模块：实现完整的用户注册、登录、JWT 认证与授权体系，集成滑块验证码增强安全性。设计会话创建、消息管理、历史记录查询等功能，支持消息统计可视化（日活跃、模型使用分布、活跃时段分析）。通过数据库索引优化与 Redis 缓存，保障海量对话数据的高性能查询。</p>
+                                <p>8. 后台管理系统：基于 Thymeleaf 构建管理后台，实现用户管理、会话管理、分享管理、反馈管理、数据统计、数据导出（Excel）等功能，支持管理员对用户进行封禁/解禁、重置密码、修改角色等操作。</p>
+                                <p>9. 对话分享与部署：实现对话内容的安全分享功能，支持生成分享链接、访问统计、分享管理。集成七牛云对象存储实现文件上传与预览。通过 Nginx 反向代理部署后端服务，配置 SSL 证书与安全防护策略，保障系统的高可用性与安全稳定的运行环境。</p>
+                                <p><strong>体验地址：</strong><a href="https://zxfhq.cn" target="_blank">https://zxfhq.cn</a></p>
+                            </div>
+                        </li>
                         <li class="experience-item">
                             <div class="experience-header">
                                 <div class="experience-title">法帮邦</div>
@@ -1236,6 +1348,11 @@
         </a>
     </nav>
 
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="back-to-top" aria-label="返回顶部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
         // 添加打印功能
         document.addEventListener('DOMContentLoaded', function() {
@@ -1243,6 +1360,31 @@
             if (printButton) {
                 printButton.addEventListener('click', () => window.print());
             }
+        });
+
+        // 返回顶部功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopBtn = document.getElementById('backToTop');
+            const showThreshold = 300; // 滚动多少像素后显示按钮
+
+            // 监听滚动事件
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > showThreshold) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+
+            // 点击返回顶部
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>
