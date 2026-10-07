@@ -416,7 +416,7 @@
 
         .badge.live { color: var(--ok); background: var(--ok-soft); }
 
-        .points { margin-top: 10px; display: grid; gap: 8px; }
+        .points { margin-top: 14px; display: grid; gap: 12px; }
 
         .points li {
             position: relative;
@@ -433,6 +433,29 @@
             height: 5px;
             border-radius: 50%;
             background: var(--accent);
+        }
+
+        .points li > strong:first-child {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+
+        .points code {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.86em;
+            padding: 1px 5px;
+            border-radius: 4px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            color: var(--ink-2);
+            word-break: break-all;
+        }
+
+        .scale {
+            margin-top: 4px;
+            font-size: 13px;
+            color: var(--text-3);
         }
 
         .stack {
@@ -473,16 +496,30 @@
 
         .project.featured { border-color: var(--accent-line); }
 
-        .minor { display: grid; gap: 10px; }
-
-        .minor li {
-            padding: 14px 18px;
-            border-radius: 10px;
-            background: var(--panel);
-            color: var(--text-2);
+        /* 项目经历通栏：卡片内左侧概述、右侧要点 */
+        .projects-wide {
+            padding: 40px 48px 48px;
+            border-top: 1px solid var(--line);
         }
 
-        .minor strong { margin-right: 6px; }
+        .section + .section.projects-wide { margin-top: 0; }
+
+        @media (min-width: 1025px) {
+            .project {
+                display: grid;
+                grid-template-columns: 300px minmax(0, 1fr);
+                column-gap: 36px;
+                align-items: start;
+                padding: 28px 32px;
+            }
+            .project .entry-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .project .points { margin-top: 0; }
+            .project-side { position: sticky; top: 24px; }
+        }
+
+        @media (max-width: 1024px) {
+            .project .points { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--line); }
+        }
 
         /* ============================================
            侧栏
@@ -609,6 +646,7 @@
             .intent div { flex-direction: column; gap: 0; }
             .intent dd { text-align: left; }
             .main { padding: 36px; }
+            .projects-wide { padding: 36px; }
             .aside { padding: 36px 28px; }
             .layout { grid-template-columns: minmax(0, 1fr) 272px; }
         }
@@ -662,6 +700,7 @@
             .intent { grid-template-columns: repeat(3, auto); justify-content: space-between; padding: 14px 16px; gap: 12px; }
 
             .main { padding: 28px var(--gutter); }
+            .projects-wide { padding: 28px var(--gutter) 32px; }
             .aside { padding: 28px var(--gutter); }
             .aside-inner { grid-template-columns: minmax(0, 1fr); gap: 32px; }
             .section + .section { margin-top: 32px; }
@@ -677,7 +716,6 @@
             .timeline { gap: 24px; }
             .timeline.work .entry { padding-left: 18px; }
             .project { padding: 18px 16px; }
-            .minor li { padding: 12px 14px; }
 
             .fab { right: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); }
             .fab button { width: 42px; height: 42px; }
@@ -703,6 +741,9 @@
             .hero, .badge, .numbers div, .tags span.key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .hero { padding: 20px 24px; }
             .main { padding: 20px 24px; }
+            .projects-wide { padding: 20px 24px; }
+            .project { display: block; padding: 16px 18px; }
+            .project-side { position: static; }
             .aside { padding: 20px 18px; }
             .layout { grid-template-columns: minmax(0, 1fr) 220px; }
             .aside-inner { display: block; }
@@ -710,7 +751,7 @@
             .numbers { grid-template-columns: repeat(4, minmax(0, 1fr)); }
             .tags span, .stack span { font-size: 10.5px; padding: 1px 6px; }
             .section-title, .entry-head { break-after: avoid; }
-            .entry, .project, .minor li { break-inside: avoid; }
+            .entry-head, .entry-lead, .points li { break-inside: avoid; }
             .section + .section { margin-top: 22px; }
             .timeline { gap: 16px; }
         }
@@ -759,15 +800,15 @@
                 <h2 class="section-title"><i class="fas fa-bolt"></i>个人优势</h2>
                 <ul class="highlights">
                     <li><strong>5 年 Java 后端经验，做过技术负责人。</strong>主导 AI 法律助手「法帮邦」从 0 到 1，后端同时支撑小程序、APP、Web 三端，并负责小团队的需求拆解与上线节奏。</li>
-                    <li><strong>业余独立维护一套线上生产环境。</strong>把 7 个 Spring Boot 应用聚合为单 JVM 部署，约 15 万行 Java、300+ 测试类，覆盖 AI 对话、微信小程序、实时对战、博客等场景，持续迭代运行。</li>
-                    <li><strong>AI 应用工程化落地。</strong>多模型统一接入与路由、多凭据多模型降级链、按日额度计数与熔断、SSE 流式输出、Function Calling 生成文档、联网搜索、文生图，关注成本、稳定性与兜底，而不只是调通接口。</li>
-                    <li><strong>能独立交付完整产品闭环。</strong>账号与风控、配额计费、微信虚拟支付 / 微信支付 / 支付宝、运营后台、Nginx 部署与发布回滚，前端（Vue、原生小程序）也能自己写。</li>
+                    <li><strong>业余独立开发并运营 6 个线上项目。</strong>炊想小程序、AI 对话平台、个人博客、QQ 空间时光库、多人实时卡牌对战、多人记账，从需求、编码、测试到部署运维全部一人完成，累计约 15 万行 Java、1600+ 个自动化测试用例。</li>
+                    <li><strong>AI 应用工程化落地。</strong>多模型统一接入与出站授权、多凭据多模型降级链、按日额度计数与熔断、SSE 流式与断线续跑、Function Calling 生成文档、联网搜索、文生图、多模态评论审核与自动回复，关注成本、稳定性与兜底，而不只是调通接口。</li>
+                    <li><strong>能独立交付完整产品闭环。</strong>账号与风控、配额计费、小程序虚拟支付与支付回调幂等落账、运营后台、Nginx 部署与平滑发布；前端（Vue、原生 JS、微信小程序）也能自己写。</li>
                 </ul>
                 <div class="numbers">
                     <div><b>5<small>年</small></b><span>Java 后端经验</span></div>
-                    <div><b>7<small>个</small></b><span>线上自研应用</span></div>
+                    <div><b>6<small>个</small></b><span>线上个人项目</span></div>
                     <div><b>15<small>万行</small></b><span>个人项目 Java 代码</span></div>
-                    <div><b>300<small>+</small></b><span>自动化测试类</span></div>
+                    <div><b>1600<small>+</small></b><span>自动化测试用例</span></div>
                 </div>
             </section>
 
@@ -783,10 +824,10 @@
                         </div>
                         <p class="entry-lead">负责「法帮邦」AI 法律助手后端的架构设计与核心开发，支撑小程序、APP、Web 三端业务，带领小型技术团队完成需求拆解、排期与上线。</p>
                         <ul class="points">
-                            <li><strong>AI 对话：</strong>设计多轮对话管理，实现会话历史持久化与上下文保持；上传文件与对话上下文绑定，AI 可基于合同内容深度回复；敏感词实时过滤与用户信息脱敏，保障内容合规。</li>
-                            <li><strong>智能合同：</strong>打通合同上传 → AI 审查 → 标准合同生成全流程，审查建议与合同原文精准关联；支持 PDF / Word / TXT 解析，Markdown 转 Word 导出法律文书。</li>
-                            <li><strong>法律知识库：</strong>建设案例、法条、文书模板检索服务，支持多条件 / 模糊 / 分页搜索；设计 24 张核心业务表，通过索引优化与 Redis 缓存提升热点查询性能。</li>
-                            <li><strong>账号与部署：</strong>JWT 认证与微信一键登录；Nginx 反向代理部署，配置 SSL 证书与安全防护策略。</li>
+                            <li><strong>AI 对话</strong>设计多轮对话管理，实现会话历史持久化与上下文保持；上传文件与对话上下文绑定，AI 可基于合同内容深度回复；敏感词实时过滤与用户信息脱敏，保障内容合规。</li>
+                            <li><strong>智能合同</strong>打通合同上传 → AI 审查 → 标准合同生成全流程，审查建议与合同原文精准关联；支持 PDF / Word / TXT 解析，Markdown 转 Word 导出法律文书。</li>
+                            <li><strong>法律知识库</strong>建设案例、法条、文书模板检索服务，支持多条件 / 模糊 / 分页搜索；设计 24 张核心业务表，通过索引优化与 Redis 缓存提升热点查询性能。</li>
+                            <li><strong>账号与部署</strong>JWT 认证与微信一键登录；Nginx 反向代理部署，配置 SSL 证书与安全防护策略。</li>
                         </ul>
                         <div class="stack"><span>Spring Boot</span><span>MyBatis-Plus</span><span>MySQL</span><span>Redis</span><span>JWT</span><span>微信小程序 SDK</span><span>大模型 API</span><span>Nginx</span></div>
                         <div class="links"><a href="https://ai.changyuanshuke.cn/h5/index.html" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i>法帮邦 H5</a></div>
@@ -799,10 +840,10 @@
                         </div>
                         <p class="entry-lead">参与公司物联网平台与配套小程序从 0 到 1 建设，以及多个制造业客户的企业级系统交付，负责后端核心逻辑设计与实现。</p>
                         <ul class="points">
-                            <li><strong>物联网平台：</strong>负责特美物联网平台（商家管理后台）与小程序后端，完成首页、设备管理、产品订购、商家入驻等 10+ 业务模块，支撑平台业务流程完整落地。</li>
-                            <li><strong>稳定性与性能：</strong>整合 Sentinel 做接口限流，Redis 缓存热点数据，Druid 监控慢 SQL，Spring Security 做权限控制，MyBatis-Plus 统一数据访问层。</li>
-                            <li><strong>微服务改造：</strong>基于 Spring Cloud 重构物料编码服务，统一编码规则，保障跨系统数据一致。</li>
-                            <li><strong>企业项目交付：</strong>参与瑞松科技、富信电子、大族激光 PLM 等项目的服务模块开发与联调，推动大族激光 PLM 顺利上线并稳定运行，获客户书面表扬。</li>
+                            <li><strong>物联网平台</strong>负责特美物联网平台（商家管理后台）与小程序后端，完成首页、设备管理、产品订购、商家入驻等 10+ 业务模块，支撑平台业务流程完整落地。</li>
+                            <li><strong>稳定性与性能</strong>整合 Sentinel 做接口限流，Redis 缓存热点数据，Druid 监控慢 SQL，Spring Security 做权限控制，MyBatis-Plus 统一数据访问层。</li>
+                            <li><strong>微服务改造</strong>基于 Spring Cloud 重构物料编码服务，统一编码规则，保障跨系统数据一致。</li>
+                            <li><strong>企业项目交付</strong>参与瑞松科技、富信电子、大族激光 PLM 等项目的服务模块开发与联调，推动大族激光 PLM 顺利上线并稳定运行，获客户书面表扬。</li>
                         </ul>
                         <div class="stack"><span>Spring Boot</span><span>Spring Cloud</span><span>Spring Security</span><span>Sentinel</span><span>Redis</span><span>MyBatis-Plus</span><span>Druid</span><span>MySQL</span></div>
                         <div class="links"><a href="https://venderlogin.temeiaiot.com" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i>特美物联网平台</a></div>
@@ -811,94 +852,6 @@
                 </div>
             </section>
 
-            <!-- 项目经历 -->
-            <section class="section">
-                <h2 class="section-title"><i class="fas fa-layer-group"></i>项目经历</h2>
-                <div class="timeline">
-
-                    <article class="entry project featured">
-                        <div class="entry-head">
-                            <h3 class="entry-title">炊想 · AI 菜谱微信小程序</h3>
-                            <span class="badges"><span class="badge live">已上线</span><span class="badge">独立开发 · 前后端</span></span>
-                        </div>
-                        <p class="entry-lead">输入一道菜名，生成详细做法、一整桌搭配（配菜 / 汤品 / 主食 / 饮品）和成品图；另有一周菜单、冰箱食材推荐、做菜模式和会员体系。小程序前端、后端和运营后台均由本人完成。</p>
-                        <ul class="points">
-                            <li><strong>生成任务异步化：</strong>一次生成需一分多钟，将同步接口拆为「预检 + 线程池执行 + 前端轮询」，任务号复用配额占位记录、不另建表；切后台、断网、重复提交都能接上原任务，失败自动退还次数。</li>
-                            <li><strong>配额与并发控制：</strong>事务内锁用户行统计 24 小时滚动窗口用量并插入占位，保证每人同时只跑一个任务，连点与多端提交不会重复扣费；上游调用用信号量限流，配合全站日上限控制模型成本。</li>
-                            <li><strong>结果复用降本：</strong>规范化菜名 + 偏好参数生成 SHA-256 缓存键，相同请求或站内已有同名菜直接返回现成做法，不调用上游、不扣次数；随机出菜按概率复用已有菜池。</li>
-                            <li><strong>商业化闭环：</strong>会员卡与次数包接入小程序虚拟支付（服务端签名、发货推送 + 主动查单兜底），扣减顺序免费 → 会员 → 次数包；邮箱验证码注册、登录失败锁定、同 IP 注册超限自动封禁。</li>
-                            <li><strong>发布与运营：</strong>部署前开启「排空」拒绝新任务并等待在途任务完成，避免发布中断用户；运营后台（用户、IP 封禁、菜谱、订单、反馈）复用博客后台，经仅回环可达的内部 API + 共享令牌对接。</li>
-                        </ul>
-                        <div class="stack"><span>原生微信小程序</span><span>Spring Boot 2.7</span><span>MySQL 8</span><span>线程池 / Semaphore</span><span>大模型文本 + 文生图</span><span>七牛云 CDN</span><span>小程序虚拟支付</span><span>订阅消息</span></div>
-                        <div class="links"><span><i class="fab fa-weixin"></i>微信搜索「炊想」体验</span></div>
-                    </article>
-
-                    <article class="entry project featured">
-                        <div class="entry-head">
-                            <h3 class="entry-title">total · 个人应用聚合平台</h3>
-                            <span class="badges"><span class="badge live">线上运行</span><span class="badge">架构 · 运维</span></span>
-                        </div>
-                        <p class="entry-lead">将 7 个原本独立部署的 Spring Boot 应用（AI 对话、博客、小程序后端、多人对战、QQ 空间时光库、记账、步数工具）合并为一个 Maven 多模块工程，单 JVM、单 jar 运行在一台云服务器上，降低内存占用与运维成本。</p>
-                        <ul class="points">
-                            <li><strong>单 JVM 多上下文：</strong>自研启动器为每个应用创建独立的 Spring ApplicationContext 与端口，隔离 Mapper XML、模板、静态资源和 Flyway 迁移目录，解决合并后的资源与 Bean 冲突；根 POM 统一管理依赖版本。</li>
-                            <li><strong>发布与回滚：</strong>部署脚本原子切换 jar、环境变量、启动脚本与 Nginx 配置，任一环节失败自动恢复；启动校验 JDK 版本、仅回环监听、各应用健康检查和正式域名代理链，全部就绪才判定发布成功。</li>
-                            <li><strong>工程质量：</strong>约 15 万行 Java、300+ 测试类，覆盖并发竞争、幂等、权限与接口契约；密钥统一由 600 权限环境文件注入，不进仓库。</li>
-                        </ul>
-                        <div class="stack"><span>Spring Boot 2.7</span><span>Maven 多模块</span><span>MySQL 8</span><span>Redis</span><span>Flyway</span><span>Nginx</span><span>Shell</span></div>
-                    </article>
-
-                    <article class="entry project">
-                        <div class="entry-head">
-                            <h3 class="entry-title">通意千应 · 多模型 AI 对话平台</h3>
-                            <span class="badges"><span class="badge live">线上运行</span><span class="badge">独立开发</span></span>
-                        </div>
-                        <p class="entry-lead">面向 C 端的 AI 对话网站，支持多模型切换、深度思考、联网搜索、文件理解、文档生成、语音朗读与会员付费。</p>
-                        <ul class="points">
-                            <li><strong>多模型接入：</strong>Kimi、GLM、DeepSeek、GPT-OSS、Nemotron 等模型统一按 OpenAI 兼容协议接入，按模型能力（推理输出、图片、工具调用、免费可用）由服务端路由与鉴权；SSE 流式输出，支持停止、重新生成与多轮上下文。</li>
-                            <li><strong>多级降级与额度：</strong>AI 率检测 / 降 AI 率走「3 个凭据 × 3 个模型 → 最终兜底」的降级链；Redis 以「凭据 + 模型」SHA-256 指纹和北京时间日期桶计数，额度耗尽当日跳过、普通限流短时熔断，并为兜底模型预留固定时间预算。</li>
-                            <li><strong>工具调用与联网：</strong>通过 Function Calling 让模型生成 DOCX / PDF / PPTX 并上传对象存储；联网搜索由辅助模型判断意图、生成多条查询后调用 Tavily，失败退回原问题直搜。</li>
-                            <li><strong>多模态与周边：</strong>PDF / Word / Excel / PPT / 图片解析后注入上下文；百度语音合成、对话分享（AI 生成标题）、会员订阅与微信 / 支付宝支付、优惠券、管理后台与使用统计。</li>
-                        </ul>
-                        <div class="stack"><span>Spring Boot</span><span>Spring Security + JWT</span><span>MyBatis-Plus</span><span>MySQL</span><span>Redis</span><span>Vue 2</span><span>SSE</span><span>Apache POI / PDFBox</span><span>七牛云</span></div>
-                        <div class="links"><a href="https://zxfhq.cn" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i>zxfhq.cn</a></div>
-                    </article>
-
-                    <article class="entry project">
-                        <div class="entry-head">
-                            <h3 class="entry-title">在线多人卡牌对战</h3>
-                            <span class="badges"><span class="badge live">线上运行</span><span class="badge">独立开发</span></span>
-                        </div>
-                        <p class="entry-lead">服务端权威的实时多人卡牌游戏（炸金花规则，仅站内虚拟积分），包含大厅、好友房、房间聊天、AI 机器人与管理后台，桌面端与手机端共用响应式单页。</p>
-                        <ul class="points">
-                            <li><strong>一致性：</strong>房间状态机 + 数据库事务 + 行锁 + 进程内房间锁共同保证操作与结算一致；积分流水幂等，牌局快照持久化，服务重启后可恢复对局。</li>
-                            <li><strong>实时同步：</strong>WebSocket 按玩家推送个性化状态（不下发他人手牌），支持掉线标记、自动重连与完整状态恢复；聊天消息幂等、限流并校验成员身份。</li>
-                            <li><strong>AI 机器人：</strong>大模型按三档难度给出行动建议，服务端校验动作、加注额、回合号与状态版本后才执行；超时或输出非法时按牌力兜底，不会卡住房间。</li>
-                        </ul>
-                        <div class="stack"><span>Spring Boot</span><span>WebSocket</span><span>MySQL 8</span><span>Flyway</span><span>BCrypt</span><span>ES6 SPA</span></div>
-                        <div class="links"><a href="https://www.hqxiaozou.top/zjh" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i>hqxiaozou.top/zjh</a></div>
-                    </article>
-
-                    <article class="entry project">
-                        <div class="entry-head">
-                            <h3 class="entry-title">召田最帅boy · 个人博客</h3>
-                            <span class="badges"><span class="badge live">线上运行</span><span class="badge">独立开发</span></span>
-                        </div>
-                        <ul class="points">
-                            <li><strong>AI 能力：</strong>评论与留言异步 AI 审核和自动回复（含图片评论），前台统一提示、后台保留诊断原因；文章页 AI 助手基于全文回答读者提问。</li>
-                            <li><strong>互动与内容：</strong>多级评论、弹幕留言墙、自定义表情、IP 归属地；Markdown 写作、分类标签、附件管理，主题切换与深色模式。</li>
-                            <li><strong>性能与安全：</strong>Redis + Ehcache 多级缓存、登录失败锁定、IP 限流；后台集成「炊想」小程序运营管理。</li>
-                        </ul>
-                        <div class="stack"><span>Spring Boot</span><span>MyBatis</span><span>Thymeleaf</span><span>Redis</span><span>Ehcache</span><span>jsoup</span></div>
-                        <div class="links"><a href="https://www.hqxiaozou.top" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i>hqxiaozou.top</a></div>
-                    </article>
-
-                    <ul class="minor">
-                        <li><strong>QQ 空间时光库</strong>说说 / 留言 / 评论增量同步，不透明游标断点续传 + 幂等落库，QQ 会话凭据 AES-GCM 加密存储；支持检索、统计与本地导出。</li>
-                        <li><strong>打牌记账</strong>WebSocket 多人实时记账，房间密码 BCrypt 加密，自动盈亏结算与历史记录。<a href="https://www.hqxiaozou.top/puke" target="_blank" rel="noopener">hqxiaozou.top/puke</a></li>
-                    </ul>
-
-                </div>
-            </section>
         </main>
 
         <!-- ========== 侧栏 ========== -->
@@ -914,7 +867,7 @@
                         </div>
                         <div class="skill">
                             <h3>数据与中间件</h3>
-                            <div class="tags"><span class="key">MySQL</span><span class="key">Redis</span><span>Kafka</span><span>RocketMQ</span><span>Elasticsearch</span><span>MongoDB</span><span>Sentinel</span><span>Flyway</span></div>
+                            <div class="tags"><span class="key">MySQL</span><span class="key">Redis</span><span>Kafka</span><span>RocketMQ</span><span>Elasticsearch</span><span>MongoDB</span><span>Caffeine</span><span>Sentinel</span><span>Flyway</span></div>
                         </div>
                         <div class="skill">
                             <h3>AI 应用</h3>
@@ -970,6 +923,148 @@
             </div>
         </aside>
     </div>
+
+    <!-- 项目经历（通栏） -->
+    <section class="section projects-wide">
+                <h2 class="section-title"><i class="fas fa-layer-group"></i>项目经历</h2>
+                <div class="timeline">
+
+                    <!-- 炊想 -->
+                    <article class="entry project featured">
+                        <div class="project-side">
+                        <div class="entry-head">
+                            <h3 class="entry-title">炊想 · AI 菜谱微信小程序</h3>
+                            <span class="badges"><span class="badge live">已上线</span><span class="badge">独立开发 · 小程序 + 后端 + 运营后台</span></span>
+                        </div>
+                        <p class="scale">2026.10 上线 · 后端 Java 2.3 万行、182 个测试用例 · 小程序 16 个页面、约 1.9 万行</p>
+                        <p class="entry-lead">「说一道菜，配成一桌饭」。输入菜名，生成带精确用量的食材清单、6–12 步做法、营养参考，以及配菜 / 汤品 / 主食 / 饮品四样搭配和成品图；没想法可以「来点灵感」随机出菜。会员另有一周菜单、请客菜单、冰箱食材推荐、「改一改」（如改成空气炸锅版）和成品图重拍。</p>
+                        <div class="stack"><span>原生微信小程序</span><span>Spring Boot 2.7</span><span>MySQL 8</span><span>ThreadPoolExecutor / Semaphore</span><span>大模型文本 + 文生图</span><span>七牛云 CDN</span><span>小程序虚拟支付</span><span>订阅消息</span><span>H2 + Stub 本地联调</span></div>
+                        <div class="links"><span><i class="fab fa-weixin"></i>微信搜索「炊想」体验</span></div>
+                        </div>
+                        <ul class="points">
+                            <li><strong>生成任务异步化</strong>一次生成要一分多钟，同步请求在小程序切后台、断网时会断开。改为「请求线程只做预检 + 线程池执行 + 前端轮询」，任务号直接复用配额占位记录、不另建表；切后台、断网、重复提交都能接上原任务，失败明确告知且自动退还次数。会员功能走独立线程池，不与普通搭配抢资源。</li>
+                            <li><strong>配额与防双花</strong>事务内 <code>SELECT … FOR UPDATE</code> 锁用户行，统计 24 小时滚动窗口用量后插入占位，同时检查是否已有进行中的任务，保证每人同一时间只跑一桌、连点与多端提交不重复扣费；结算只处理仍为「进行中」的记录，晚到的结果不会把已退还的次数再扣掉；启动时自动退还上次遗留的占位。扣减顺序为免费 → 会员 → 次数包（先到期先用）。</li>
+                            <li><strong>模型成本控制</strong>规范化菜名 + 偏好参数生成 SHA-256 缓存键，相同请求、站内已有同名菜、随机菜池命中时直接返回现成做法，不调上游、不扣次数；常见菜可后台预先搭好。上游调用用公平信号量限并发、配合全站日上限；流式读取上游，两段输出间隔超过 30 秒或总时长超过 140 秒即中止，5xx / 超时重试 1 次、429 不重试。</li>
+                            <li><strong>小程序虚拟支付</strong>会员卡（月卡 / 季卡，叠加购买自动顺延）与次数包走道具直购。服务端生成 paySig / signature 签名；发货推送先 SHA-1 验签再 AES-256-CBC 解密，锁订单行幂等发货；每 5 分钟主动查单补发，退款推送自动收回权益。</li>
+                            <li><strong>成品图链路</strong>做法先返回，成品图异步生成后淡入：上游出图 → 去透明通道转 JPEG → 上传七牛 CDN，状态机管理生成中 / 成功 / 失败，失败 30 秒后自动重试一次；会员重拍期间原图照常显示，失败保留原图并退还次数。</li>
+                            <li><strong>账号与风控</strong>邮箱验证码注册 / 找回密码（限频 + 每日上限），登录令牌只存 SHA-256，登录失败锁定；同 IP 注册超限自动限制，后台封禁 IP 时联动禁用名下账号并踢下线；只信任本机 Nginx 写入的真实 IP，不读 X-Forwarded-For；菜名经白名单正则 + 微信内容安全接口过滤。</li>
+                            <li><strong>平滑发布与运营后台</strong>部署脚本先开启「排空」拒绝新的生成任务、轮询等在途任务归零再停服，用户不会因发布丢单。运营后台（用户、订单补发、权益赠送、IP 封禁、菜谱精选、反馈、操作日志）集成在博客后台，经仅回环可达的内部 API 对接，令牌常量时间比对，不通过一律 404。</li>
+                            <li><strong>小程序前端</strong>原生开发、无构建步骤。封装通用轮询器（防请求重叠、等久自动放慢、页面隐藏时停止、回到前台立即补查）；做菜模式全屏分步、按结束时刻计时（切后台不停表）、屏幕常亮；买菜清单按单位合并同名食材；排查并解决 iOS / 安卓两个输入框切换时键盘弹出即收起的问题（同一时刻只渲染一个原生输入框，由代码聚焦）；静态自检脚本拦截配置与文案错误。</li>
+                        </ul>
+                    </article>
+
+                    <!-- 通意千应 -->
+                    <article class="entry project featured">
+                        <div class="project-side">
+                        <div class="entry-head">
+                            <h3 class="entry-title">通意千应 · 多模型 AI 对话平台</h3>
+                            <span class="badges"><span class="badge live">线上运行</span><span class="badge">独立开发</span></span>
+                        </div>
+                        <p class="scale">Java 3.1 万行、319 个测试用例 · 前端 Vue 2 + Element UI</p>
+                        <p class="entry-lead">面向 C 端的 AI 对话网站：多模型切换、深度思考、联网搜索、网页链接解析、附件与图片理解、生成 Word / PDF / PPT、语音朗读、对话分享、AI 人设、会员订阅，以及带数据看板的管理后台。</p>
+                        <div class="stack"><span>Spring Boot</span><span>Spring Security + JWT</span><span>MyBatis-Plus</span><span>MySQL</span><span>Redis + Lua</span><span>SSE</span><span>Vue 2</span><span>Apache POI / PDFBox</span><span>LibreOffice</span><span>七牛云</span></div>
+                        <div class="links"><a href="https://zxfhq.cn" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i>zxfhq.cn</a></div>
+                        </div>
+                        <ul class="points">
+                            <li><strong>SSE 流式输出与断线续跑</strong>Servlet 直接输出 <code>text/event-stream</code>（关闭 Nginx 缓冲），上游用 HttpClient 连接池逐行读取，向前端推送推理、正文、文件生成、心跳等 8 类事件；支持停止生成与重新生成。用户关掉页面后由后台线程把回复生成完并落库，重新打开时轮询取回；生成状态用条件更新，防止迟到的完成 / 中止结果互相覆盖。</li>
+                            <li><strong>多模型统一接入</strong>Kimi、GLM、DeepSeek、GPT-OSS、Nemotron 等按 OpenAI 兼容协议接入，每个模型的能力（推理输出方式、图片、工具调用、免费可用）在 YAML 中声明；用状态机统一解析三种推理输出格式（原生 reasoning_content、&lt;think&gt; 标签、分节文本）。所有出站 AI 请求必须经过统一授权服务（校验调用者身份、模型白名单、HTTPS 固定域名），并用架构测试保证密钥只在两处读取。</li>
+                            <li><strong>多级降级与额度控制</strong>AI 率检测 / 降 AI 率走「3 个凭据 × 3 个模型 → 最终兜底」共 10 条线路；Redis 以「凭据 + 模型」SHA-256 指纹和北京时间日期桶计数，额度耗尽当日跳过、普通 429 短时熔断，每路单独超时并始终为兜底模型预留时间。高价模型用 Redis Lua 原子完成并发租约、分钟 / 日次数与日成本额度，Redis 异常时拒绝请求（fail-closed）。</li>
+                            <li><strong>Function Calling 生成文档</strong>模型调用 <code>generate_document</code> 工具，服务端修复流式拼接中不完整的参数 JSON，用 flexmark 解析 Markdown 后分别以 POI（DOCX / PPTX）和 openhtmltopdf（PDF，内置中文字体）渲染，上传七牛后以附件卡片推送。</li>
+                            <li><strong>联网搜索与链接解析</strong>辅助模型先判断是否需要搜索并生成最多 3 条查询，CompletableFuture 并行请求 Tavily，3 个 Key 依次故障转移，失败退回原问题直搜；网页解析按「Tavily Extract → Tavily Search → 本地抓取」三级回退，本地抓取在 DNS 层拒绝内网地址，防 SSRF。</li>
+                            <li><strong>附件理解</strong>PDF / Word / Excel / PPT / 图片解析后注入上下文，追问时沿用历史附件；Office 文件经 LibreOffice 转 PDF 在线预览；图片压缩后再发给视觉模型；历史附件批量查询消除 N+1。</li>
+                            <li><strong>安全与会员</strong>JWT 存 HttpOnly + SameSite Cookie，令牌带版本号、改密码后旧令牌全部失效，注销黑名单存 Redis；登录 / 注册用 Lua 原子限流。会员订阅的支付回调完成微信（MD5 / HMAC-SHA256）与支付宝（RSA2）验签、商户与金额校验，锁用户行和订单行幂等落账；兑换券用 CAS 防并发重复使用。</li>
+                        </ul>
+                    </article>
+
+                    <!-- 博客 -->
+                    <article class="entry project featured">
+                        <div class="project-side">
+                        <div class="entry-head">
+                            <h3 class="entry-title">召田最帅boy · 个人博客</h3>
+                            <span class="badges"><span class="badge live">线上运行</span><span class="badge">独立开发</span></span>
+                        </div>
+                        <p class="scale">Java 3.3 万行、592 个测试用例 · 6 套主题 · 服务端渲染 Thymeleaf</p>
+                        <p class="entry-lead">个人技术博客与留言社区：文章、归档、搜索、RSS；楼中楼评论、弹幕留言墙、表情包、留言传图；文章页 AI 助手；纪念日等趣味页面。后台管理文章、评论、图片库、主题、菜单、音乐，并集成「炊想」小程序运营后台。</p>
+                        <div class="stack"><span>Spring Boot</span><span>MyBatis / MyBatis-Plus</span><span>Thymeleaf</span><span>MySQL</span><span>Caffeine</span><span>Redis</span><span>Spring Mail</span><span>七牛云</span><span>jsoup</span></div>
+                        <div class="links"><a href="https://www.hqxiaozou.top" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i>hqxiaozou.top</a></div>
+                        </div>
+                        <ul class="points">
+                            <li><strong>AI 评论审核与自动回复</strong>评论在事务提交后异步审核，经外链 / 图片数硬规则、本地敏感词、大模型三道关；图片评论由服务端下载（主机白名单 + 文件签名校验）转 Base64 交给多模态模型。审核状态机的每次迁移都是带原状态的条件更新，AI 结果不会覆盖博主的人工操作。</li>
+                            <li><strong>回复质量</strong>上下文取整楼对话（最多 30 条），文章正文按 700 字分块、用中文二元组与评论做重合度打分，只取最相关片段（轻量检索，不依赖向量库）；模型输出 JSON 并附带白名单表情，经质量评分不合格时带原因重写，最多 2 次。</li>
+                            <li><strong>失败重试与止损</strong>定时任务按主键游标分批重跑失败评论；对重试无效的错误或超过 24 小时仍未成功的评论，转人工并邮件通知博主，不再重试（此前线上出现过单条评论被重试 312 次）；进程重启时恢复卡在「回复中」的评论，且不会重复回复。</li>
+                            <li><strong>文章 AI 助手</strong>服务端按文章 ID 读取权威全文，按「更新时间 + 内容哈希」缓存格式化后的上下文；主备凭据自动切换；系统提示词声明文章与历史均为不可信数据，防提示注入；按 IP 限流。</li>
+                            <li><strong>邮件通知可靠投递</strong>发件箱模式，邮件任务带幂等键，用条件更新抢占后再发送，失败按 1 / 5 / 15 分钟退避重试；邮件中的图片改为内嵌附件，解决 QQ 邮箱被图床防盗链拦截的问题。</li>
+                            <li><strong>性能优化</strong>静态资源按真实前缀挂载并加内容哈希、缓存一年（消除归档页约 770 ms 的路由开销）；字体按站点用字子集化（每页约 1 MB 降为全站共用一份），留言板冷加载从 7.3 MB 降到 0.9 MB；Caffeine 缓存文章、评论、归档 HTML 与 RSS（ETag / 304），评论缓存单独隔离、事务提交后再失效；消除 N+1，浏览量改为原子自增。</li>
+                            <li><strong>安全</strong>BCrypt 存储密码（旧 MD5 登录时平滑升级），Redis 记录登录失败并锁定，登录后轮换会话 ID；后台 CSRF 拦截器；评论内容多层实体解码后再转义，只还原系统生成的标签；上传路径防穿越；删除图床图片需邮箱验证码。</li>
+                            <li><strong>前端体验</strong>6 套主题，明暗切换带日月动画并尊重「减少动态效果」；Canvas 生成分享海报（微信内可长按保存）；Mermaid、KaTeX 按需加载；弹幕多轨道布局；音乐播放器在添加歌曲前探测能否完整播放。</li>
+                        </ul>
+                    </article>
+
+                    <!-- QQ 空间时光库 -->
+                    <article class="entry project">
+                        <div class="project-side">
+                        <div class="entry-head">
+                            <h3 class="entry-title">空间拾光 · QQ 空间时光库</h3>
+                            <span class="badges"><span class="badge live">线上运行</span><span class="badge">独立开发</span></span>
+                        </div>
+                        <p class="scale">Java 2.8 万行、453 个测试用例 · 原生 JS 单页应用</p>
+                        <p class="entry-lead">手机 QQ 扫码授权后，把自己的说说、留言板、互动记录和相册同步到数据库，提供关键词检索、媒体墙、相册浏览、互动人排行、统计概览，以及 JSON / CSV / HTML 导出；还能从互动记录中找回一部分已删除内容的快照。</p>
+                        <div class="stack"><span>Spring Boot</span><span>Spring Data JPA</span><span>MySQL 8</span><span>Flyway</span><span>Apache HttpClient</span><span>AES-GCM</span><span>原生 JS SPA</span></div>
+                        <div class="links"><a href="https://www.zxfhq.cn/qzone/" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i>zxfhq.cn/qzone</a></div>
+                        </div>
+                        <ul class="points">
+                            <li><strong>扫码登录</strong>自行实现 QQ 扫码登录协议（获取二维码、计算校验令牌、轮询扫码状态），只跟随可信的 QQ HTTPS 跳转；数据按「已验证 QQ 号的 SHA-256」隔离，所有查询限定在本人范围内。</li>
+                            <li><strong>敏感数据保护</strong>QQ 登录凭证和断点游标用 AES-256-GCM 加密落库（主密钥来自环境变量、每次随机 IV、带 AAD）；浏览器会话令牌只放 HttpOnly Cookie、库里只存哈希；日志不记录上游响应和原始 QQ 号。</li>
+                            <li><strong>增量同步与断点续传</strong>说说、留言、互动记录各有独立断点；互动记录的不透明游标只改偏移量、其余字段原样回传；增量模式保留重叠窗口防漏数据；长任务按时间 / 页数分片、自动续跑，应用重启后自动恢复中断任务。</li>
+                            <li><strong>坏页跳过与缺口回填</strong>深层分页遇到上游报错时，先指数扩大偏移试探、再二分查找最小可读偏移，跨过坏页继续同步；之后从失败位置向前回退，把缺口里本来可读的记录取回来。限流、超时、会话失效不算坏页。</li>
+                            <li><strong>幂等与数据可信</strong>Flyway 管理 12 个版本迁移，各类内容用业务唯一键去重，内容与断点在同一事务提交；可见性按正负证据判定，部分扫描只记正向证据，系统从不断言「确认已删除」。</li>
+                            <li><strong>访问节制与防护</strong>对上游全局限速、指数退避重试、连续失败熔断，账号级请求预算持久化到数据库（行锁），重启也不会被绕过；上游响应限 5 MB。导出在可重复读事务中按同一快照流式输出；导入校验压缩比、条目数，防 ZIP 炸弹。</li>
+                        </ul>
+                    </article>
+
+                    <!-- 卡牌对战 -->
+                    <article class="entry project">
+                        <div class="project-side">
+                        <div class="entry-head">
+                            <h3 class="entry-title">在线多人卡牌对战</h3>
+                            <span class="badges"><span class="badge live">线上运行</span><span class="badge">独立开发</span></span>
+                        </div>
+                        <p class="scale">Java 1.2 万行、96 个测试用例 · 原生 ES6 单页应用</p>
+                        <p class="entry-lead">服务端权威的实时多人卡牌游戏（炸金花规则，仅站内虚拟积分，不可充值兑换）：大厅、邀请码好友房、可配置规则、房间聊天、三档难度 AI 机器人、积分与对局历史、管理后台；手机、平板、电脑共用一套响应式页面。</p>
+                        <div class="stack"><span>Spring Boot</span><span>Spring Security</span><span>WebSocket</span><span>MySQL 8</span><span>Flyway</span><span>ES6 SPA</span></div>
+                        <div class="links"><a href="https://www.hqxiaozou.top/zjh/" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i>hqxiaozou.top/zjh</a></div>
+                        </div>
+                        <ul class="points">
+                            <li><strong>并发一致性</strong>按房间分段的 256 把公平锁 + 事务内悲观行锁；先复制快照修改、提交成功后再替换内存状态并广播，失败整体回滚、旧状态继续有效；每秒扫描超时并用确定性请求号防重复处理。牌局快照持久化，服务重启可恢复对局。</li>
+                            <li><strong>积分与操作幂等</strong>积分流水以业务键唯一约束，重放直接返回、同键不同参数报冲突，金额运算防溢出；玩家动作的请求号经内存与唯一索引双重去重；聊天消息同样幂等。</li>
+                            <li><strong>实时同步</strong>WebSocket 为每位玩家生成独立视图，不下发他人手牌；前端指数退避 + 随机抖动重连、定时心跳，重连后服务端直接返回完整状态与最近聊天；退出登录、账号停用、改密码时即时断开对应连接；前后端都按状态版本号丢弃过期状态。</li>
+                            <li><strong>公平与安全</strong>SecureRandom + Fisher–Yates 无偏洗牌；Session + CSRF 防护，管理接口 URL 与方法级双重鉴权；积分调整必须填写原因并写入审计日志。</li>
+                            <li><strong>AI 机器人</strong>穷举 18,424 种对手可能手牌计算胜率，与底池、跟注成本等公开信息一起交给大模型做 JSON 决策；服务端按难度阈值拦截不合理动作，并校验动作合法性、回合号与状态版本后才执行，超时或输出非法时按牌力兜底，不会卡住房间。</li>
+                        </ul>
+                    </article>
+
+                    <!-- 打牌记账 -->
+                    <article class="entry project">
+                        <div class="project-side">
+                        <div class="entry-head">
+                            <h3 class="entry-title">打牌记账 · 多人实时记账</h3>
+                            <span class="badges"><span class="badge live">线上运行</span><span class="badge">独立开发</span></span>
+                        </div>
+                        <p class="scale">Java 3 千行、20 个后端测试 + 6 个前端测试 · 面向手机与微信内置浏览器</p>
+                        <p class="entry-lead">线下打牌的多人记账工具：房主建房（可设密码），朋友扫码或输入房间号加入，点选对方即可记账，余额实时同步给房间内所有人；房主一键结算，展示每人应收应付和全部账单。</p>
+                        <div class="stack"><span>Spring Boot</span><span>WebSocket</span><span>MyBatis-Plus</span><span>MySQL</span><span>Thymeleaf</span></div>
+                        <div class="links"><a href="https://www.hqxiaozou.top/puke/" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i>hqxiaozou.top/puke</a></div>
+                        </div>
+                        <ul class="points">
+                            <li><strong>记账事务</strong>依次锁房间行、双方用户行，原子更新余额（带溢出检查）后写账单，任一步失败双方余额一起回滚；金额以「分」为单位存整数。</li>
+                            <li><strong>并发加入</strong>房间行锁串行化加入，条件自增作为防超员的最后一道防线；昵称查重用加锁读，避开可重复读隔离级别下读到旧快照的问题。</li>
+                            <li><strong>WebSocket 同步</strong>连接必须先完成身份校验才订阅房间；用 <code>ConcurrentHashMap.compute</code> 原子管理房间会话；广播走有界线程池，单连接同步发送，避免并发写异常；前端心跳 + 单连接重连。</li>
+                            <li><strong>安全与性能</strong>服务端签发随机成员凭证、常量时间比对；房间密码 BCrypt 加密并限制 72 字节；昵称统一转义；批量查询 100 个房间只需 2 次 SQL。</li>
+                        </ul>
+                    </article>
+
+                </div>
+            </section>
 </div>
 
 <!-- 悬浮按钮 -->
