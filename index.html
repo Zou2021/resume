@@ -577,7 +577,7 @@
         /* ============================================
            悬浮按钮 / 微信弹窗
            ============================================ */
-        .fab {
+        .float-actions {
             position: fixed;
             right: 20px;
             bottom: calc(20px + env(safe-area-inset-bottom));
@@ -587,7 +587,7 @@
             z-index: 50;
         }
 
-        .fab button {
+        .float-actions button {
             width: 44px;
             height: 44px;
             border-radius: 50%;
@@ -602,7 +602,7 @@
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
-        .fab button:hover { transform: translateY(-2px); }
+        .float-actions button:hover { transform: translateY(-2px); }
 
         #backToTop { opacity: 0; pointer-events: none; transform: translateY(8px); }
         #backToTop.show { opacity: 1; pointer-events: auto; transform: none; }
@@ -717,8 +717,8 @@
             .timeline.work .entry { padding-left: 18px; }
             .project { padding: 18px 16px; }
 
-            .fab { right: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); }
-            .fab button { width: 42px; height: 42px; }
+            .float-actions { right: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); }
+            .float-actions button { width: 42px; height: 42px; }
         }
 
         @media (min-width: 641px) {
@@ -737,7 +737,7 @@
             }
             body { background: #fff; padding: 0; font-size: 12.5px; line-height: 1.6; }
             .page { box-shadow: none; border-radius: 0; max-width: none; }
-            .fab, dialog, .no-print { display: none !important; }
+            .float-actions, dialog, .no-print { display: none !important; }
             .hero, .badge, .numbers div, .tags span.key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .hero { padding: 20px 24px; }
             .main { padding: 20px 24px; }
@@ -1068,7 +1068,7 @@
 </div>
 
 <!-- 悬浮按钮 -->
-<div class="fab">
+<div class="float-actions">
     <button type="button" id="printBtn" title="打印 / 存为 PDF" aria-label="打印或存为 PDF"><i class="fas fa-print"></i></button>
     <button type="button" id="backToTop" title="返回顶部" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
 </div>
